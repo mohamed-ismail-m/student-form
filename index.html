@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student form</title>
+</head>
+
+<body>
+    <style>
+        .button {
+            background-color: aqua;
+            width: 230px;
+            align-items: center;
+            padding-left: 25px;
+        }
+
+        table {
+            margin-top: 20px;
+            gap: 2px;
+        }
+
+        #userTable {
+            border-collapse: collapse;
+        }
+    </style>
+    <center>
+        <section class="userForm">
+            <h1>STUDENT FORM </h1>
+            <form>
+
+                <table border="1">
+                    
+                        <tr>
+                            <div class="userDeatils">
+                            <td> Name</td>
+                            <td><input type="text" id="name" name="name" required></td></div>
+                        </tr>
+                    
+                    
+                    <tr>
+                        <div class="userDeatils">
+                        <td>Age</td>
+                        <td><input type="number" id="age" name="age" required></td></div>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <div class="userDeatils">
+                        <td>Gender</td>
+                        <td><input type="radio" name="gender" id="gender" value="Male" required>Male
+                            <input type="radio" name="gender" id="gender" value="Female" required>Female
+                        </td></div>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <div class="userDeatils">
+                        <td>Course</td>
+                        <td><select name="course" id="course">
+                                <option value="Javascript">JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="c++">c++</option>
+                                <option value="java">Java</option>
+                            </select>
+                        </td></div>
+                    </tr>
+                    
+                    
+                    <tr>
+
+                        <div class="userDeatils"></div>
+                        <td>E-mail</td>
+                        <td><input type="email" id="email" name="email" required></td></div>
+                    </tr>
+                    
+                    
+                 <tr>
+                        <div class="userDeatils">
+                        <td colspan="2"> <input type="submit" value="submit"></td></div>
+                    </tr>
+                    
+                </table>
+            </form>
+        </section>
+
+        <section class="userTable">
+            <h1>User Table</h1>
+            <table border="1" id="userTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>course</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--  The table body will be populated with user data after form submission  -->
+                    <!-- [
+                  [],
+                  [],
+                  []
+                  ] -->
+
+                </tbody>
+            </table>
+        </section>
+    </center>
+
+        <script>
+            const form = document.querySelector("form")
+
+            //.getElementByIdTagName---wrong  .getElementsByTagName---correct
+            const userTable = document.getElementById("userTable").getElementsByTagName('tbody')[0]
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault()
+
+                // const name = document.getElementById("name").value
+                // const age = document.getElementById("age").value
+                // const gender = document.getElementById("gender").value
+                // const course = document.getElementById("course").value
+                // const email = document.getElementById("email").value
+
+
+
+
+
+                // let userDeatils = {
+                //     name,
+                //     age,
+                //     gender,
+                //     course,
+                //     email,
+
+
+                // }
+
+                // console.log("userDeatils", userDeatils)
+
+                // const formData = new FormData(form_name)
+                const formData = new FormData(form)
+                console.log("formData", formData)
+
+                let userDetails = {
+                    name: formData.get("name"),
+                    age: formData.get("age"),
+                    gender: formData.get("gender"),
+                    course: formData.get("course"),
+                    email: formData.get("email")
+                }
+
+
+                console.log("userDetails",userDetails)
+                const row = userTable.insertRow()
+
+                row.innerHTML = `
+                    <td>${userDetails.name}</td>
+                    <td>${userDetails.age}</td>
+                    <td>${userDetails.gender}</td>
+                    <td>${userDetails.course}</td>
+                    <td>${userDetails.email}</td>
+                    <td>
+
+                        <button onclick="deleteRow(this)">Delete</button>
+
+
+                    </td>
+                    `
+
+                    
+
+                form.reset()
+
+            })
+            function deleteRow(deleteBtn) {
+                deleteBtn.parentNode.parentNode.remove()
+            }
+            
+
+
+
+        </script>
+    
+</body>
+</html>
